@@ -1,7 +1,7 @@
 #!/bin/bash
 #case select test
-echo '欢迎使用CutefishDE自动编译脚本，本脚本仅适用于官方CutefishOS，若编译出现错误可根据官方GitHub自行修改脚本内容再次编译，原作者Moore本墨，地址https://github.com/Moore2253/CutefishOSBuild.sh'
-echo '增加了一次编译所有库的功能，修改者wujunyi'
+echo '欢迎使用CutefishDE自动编译脚本，本脚本仅适用于官方CutefishOS，若编译出现错误可根据官方GitHub自行修改脚本内容再次编译，作者Moore本墨，地址https://github.com/Moore2253/CutefishOSBuild.sh'
+echo '更新日志：2.0 2022年1月2日 感谢wujunyi的修改让脚本增加了一次编译所有项目的功能'
 echo '提示：请输入项目前序号并回车以开始编译，输入25(quit)退出'
 
 PS3='请选择你要编译的项目：'
