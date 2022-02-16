@@ -1,308 +1,331 @@
 #!/bin/bash
-#case select test
-echo '欢迎使用CutefishDE自动编译脚本，本脚本仅适用于官方CutefishOS，若编译出现错误可根据官方GitHub自行修改脚本内容再次编译，作者Moore本墨，地址https://github.com/Moore2253/CutefishOSBuild.sh'
-echo '更新日志：2.0 2022年1月2日 感谢wujunyi的修改让脚本增加了一次编译所有项目的功能'
-echo '提示：请输入项目前序号并回车以开始编译，输入25(quit)退出'
+#case select test for
+echo '欢迎使用CutefishDE自动编译脚本, 本脚本适用于大部分Debian/Ubuntu发行版, 旨在让更多Linux使用可爱鱼.'
+echo '若编译出现错误可根据官方GitHub自行修改脚本内容再次编译, 官方Github: https://github.com/cutefishos/ .'
+echo '原作者Moore本墨, Github: https://github.com/Moore2253/CutefishOSBuild.sh'
+echo '增加了一次编译所有库的功能, 修改者wujunyi'
+echo '提示: 请输入项目前序号并回车以开始编译, 输入25(quit)退出'
 
-PS3='请选择你要编译的项目：'
+PS3='请选择你要编译的项目, 25为退出: '
 echo $PS3
+echo '检测~/目录下是否存在是否已经存在cutefishos文件夹'
+if test -e ~/cutefishos 
+then
+  echo '检测到同名文件夹, 正在删除'
+  sudo rm -rf ~/cutefishos
+  echo '删除完毕, 重新创建文件夹, 继续编译'
+  mkdir ~/cutefishos
+else
+  echo "无同名文件夹, 继续编译"
+  mkdir ~/cutefishos
+fi
+
+echo '开始安装依赖'
+sudo apt install libpolkit-qt5-1-dev qml-module-qtquick-dialogs libxcb-damage0-dev libicu-dev libqapt-dev libkf5solid-dev pkg-config extra-cmake-modules libpam0g-dev libxcb-util-dev lintian libsm-dev libkf5screen-dev libxcb-composite0-dev qml-module-qt-labs-settings libqt5sensors5-dev libcanberra-dev qml-module-qtqml debhelper libfreetype6-dev libkf5bluezqt-dev qml-module-qtquick-shapes libapt-pkg-dev xserver-xorg-dev qtbase5-dev libx11-dev libcrypt-dev libfontconfig1-dev cmake qml-module-qtquick-particles2 libxcb1-dev xserver-xorg-input-synaptics-dev libkf5idletime-dev libkf5networkmanagerqt-dev automake libqt5x11extras5-dev git libxcb-dri2-0-dev qml-module-qtquick2 libxcursor-dev qttools5-dev qml-module-qtquick-layouts libcanberra-pulse libxcb-keysyms1-dev libsystemd-dev gcc -y libxcb-glx0-dev qttools5-dev-tools qml-module-qtquick-window2 libxcb-image0-dev libcap-dev libpulse-dev libxcb-randr0-dev qml-module-qtquick-controls2 libxcb-shm0-dev libxcb-ewmh-dev equivs libxcb-icccm4-dev qtdeclarative5-dev libkf5kio-dev qtquickcontrols2-5-dev libkf5coreaddons-dev devscripts libxcb-xfixes0-dev libxcb-record0-dev qml-module-qt-labs-platform libxtst-dev libxcb-dpms0-dev build-essential libkf5windowsystem-dev xserver-xorg-input-libinput-dev autotools-dev libx11-xcb-dev libxcb-dri3-dev qml-module-org-kde-kwindowsystem libkf5globalaccel-dev qtbase5-private-dev modemmanager-qt-dev libpolkit-agent-1-dev curl libxcb-shape0-dev --no-install-recommends -y
 
 function Compile(){
     case $1 in 
         filemanager)
         echo '开始编译filemanager'
-        echo '正在检测是否有同名文件夹'
-        if test -e ~/filemanager 
-        then
-         echo '检测到同名文件夹，正在删除'
-         sudo rm -rf ~/filemanager
-         echo '删除完毕，继续编译'
-        else
-         echo "无同名文件夹，继续编译"
-        fi
-        echo '正在安装依赖'
-        sudo apt install build-essential cmake extra-cmake-modules libkf5kio-dev libkf5solid-dev libkf5windowsystem-dev qtbase5-dev qtbase5-private-dev qtdeclarative5-dev qtquickcontrols2-5-dev qttools5-dev qttools5-dev-tools
+        cd ~/cutefishos
         echo '正在克隆项目'
         git clone git://github.com/cutefishos/filemanager.git
         echo '正在编译'
-        cd filemanager
+        cd ~/cutefishos/filemanager
+        sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
+        dpkg-buildpackage -b -uc -us
         mkdir build
         cd build
         cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
         make
-        echo '编译完成，正在安装'
+        echo '编译完成, 正在安装'
         sudo make install
-        cd ~
-        echo '文件管理器安装完成'
+        echo 'filemanager安装完成'
         ;;
         dock)
+        echo '开始编译dock'
+        cd ~/cutefishos
+        echo '正在克隆项目'
         git clone git://github.com/cutefishos/dock.git
-        cd dock
+        echo '正在编译'
+        cd ~/cutefishos/dock
+        sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
+        dpkg-buildpackage -b -uc -us
         mkdir build
         cd build
         cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
         make
+        echo '编译完成, 正在安装'
         sudo make install
-        cd ~
+        echo 'dock安装完成'
         ;;
         fishui)
-        sudo apt install libqt5x11extras5-dev libkf5windowsystem-dev qtbase5-private-dev libxcb1-dev libxcb-shape0-dev libxcb-icccm4-dev -y
+        cd ~/cutefishos
         git clone git://github.com/cutefishos/fishui.git
-        cd fishui
-        sudo apt install equivs devscripts --no-install-recommends
+        cd ~/cutefishos/fishui
         sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
+        dpkg-buildpackage -b -uc -us
         mkdir build
         cd build
         cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
         make
         sudo make install
-        dpkg-buildpackage -b -uc -us
-        cd ~
         ;;
         screenshot)
-        sudo apt install cmake qtbase5-dev qtdeclarative5-dev qtquickcontrols2-5-dev qttools5-dev qttools5-dev-tools qml-module-qtquick-controls2 qml-module-qtquick2 qml-module-qtquick-layouts qml-module-qt-labs-platform qml-module-qt-labs-settings qml-module-qtqml qml-module-qtquick-window2 qml-module-qtquick-shapes qml-module-qtquick-dialogs qml-module-qtquick-particles2
+        cd ~/cutefishos
         git clone git://github.com/cutefishos/screenshot.git
-        cd screenshot
+        cd ~/cutefishos/screenshot
+        sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
+        dpkg-buildpackage -b -uc -us
         mkdir build
         cd build
         cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
         make
         sudo make install
-        cd ~
         ;;
         qt-plugins)
+        cd ~/cutefishos
         git clone git://github.com/cutefishos/qt-plugins.git
-        cd qt-plugins
+        cd ~/cutefishos/qt-plugins
+        sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
+        dpkg-buildpackage -b -uc -us
         mkdir build
         cd build
         cmake ..
         make
         sudo make install
-        cd ~
         ;;
         terminal)
-        sudo apt install extra-cmake-modules qtbase5-dev qtdeclarative5-dev qtquickcontrols2-5-dev qttools5-dev
+        cd ~/cutefishos
         git clone git://github.com/cutefishos/terminal.git
-        cd terminal
+        cd ~/cutefishos/terminal
+        sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
+        dpkg-buildpackage -b -uc -us
         mkdir build
         cd build
         cmake ..
         make
         sudo make install
-        cd ~
         ;;
         launcher)
-        sudo apt install gcc cmake qtbase5-dev qml-module-qtquick-controls2 qml-module-org-kde-kwindowsystem qtdeclarative5-dev qtquickcontrols2-5-dev qttools5-dev libkf5windowsystem-dev
+        cd ~/cutefishos
         git clone git://github.com/cutefishos/launcher.git
-        cd launcher
+        cd ~/cutefishos/launcher
+        sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
+        dpkg-buildpackage -b -uc -us
         mkdir build
         cd build
         cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
         make
         sudo make install
-        cd ~
         ;;
         settings)
-        sudo apt install cmake debhelper extra-cmake-modules libicu-dev libcrypt-dev libfreetype6-dev libfontconfig1-dev libkf5networkmanagerqt-dev modemmanager-qt-dev qtbase5-dev qtdeclarative5-dev qtquickcontrols2-5-dev qttools5-dev qttools5-dev-tools qml-module-qtquick-controls2 qml-module-qtquick2 qml-module-qtquick-layouts qml-module-qt-labs-platform qml-module-qt-labs-settings qml-module-qtqml qml-module-qtquick-window2 qml-module-qtquick-shapes qml-module-qtquick-dialogs qml-module-qtquick-particles2
+        cd ~/cutefishos
         git clone git://github.com/cutefishos/settings.git
-        cd settings
+        cd ~/cutefishos/settings
+        sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
+        dpkg-buildpackage -b -uc -us
         mkdir build
         cd build
         cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
         make
         sudo make install
-        cd ~
         ;;
         debinstaller)
-        sudo apt install cmake debhelper qtbase5-dev qtdeclarative5-dev qtquickcontrols2-5-dev libqapt-dev libapt-pkg-dev
-        git git://github.com/cutefishos/debinstaller.git
-        cd debinstaller
+        cd ~/cutefishos
+        git clone git://github.com/cutefishos/debinstaller.git
+        cd ~/cutefishos/debinstaller
+        sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
+        dpkg-buildpackage -b -uc -us
         mkdir build
         cd build
         cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
         make
         sudo make install
-        cd ~
         ;;
         icons)
-        git git://github.com/cutefishos/icons.git
-        cd icons
+        cd ~/cutefishos
+        git clone git://github.com/cutefishos/icons.git
+        cd ~/cutefishos/icons
+        sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
+        dpkg-buildpackage -b -uc -us
         mkdir build
         cd build
         cmake  ..
         make
         sudo make install
-        cd ~
-        ;;
-        debinstaller)
-        sudo apt install cmake debhelper qtbase5-dev qtdeclarative5-dev qtquickcontrols2-5-dev libqapt-dev libapt-pkg-dev
-        git git://github.com/cutefishos/debinstaller.git
-        cd debinstaller
-        mkdir build
-        cd build
-        cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
-        make
-        sudo make install
-        cd ~
         ;;
         gtk-themes)
-        git git://github.com/cutefishos/gtk-themes.git
-        cd gtk-themes
+        cd ~/cutefishos
+        git clone git://github.com/cutefishos/gtk-themes.git
+        cd ~/cutefishos/gtk-themes
+        sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
+        dpkg-buildpackage -b -uc -us
         mkdir build
         cd build
         cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
         make
         sudo make install
-        cd ~
         ;;
         daemon)
-        sudo apt install cmake libqapt-dev
-        git git://github.com/cutefishos/daemon.git
-        cd daemon
+        cd ~/cutefishos
+        git clone git://github.com/cutefishos/daemon.git
+        cd ~/cutefishos/daemon
+        sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
+        dpkg-buildpackage -b -uc -us
         mkdir build
         cd build
         cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
         make
         sudo make install
-        cd ~
         ;;
         statusbar)
-        sudo apt install libkf5windowsystem-dev -y
+        cd ~/cutefishos
         git clone git://github.com/cutefishos/statusbar.git
-        cd statusbar
+        cd ~/cutefishos/statusbar
+        sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
+        dpkg-buildpackage -b -uc -us
         mkdir build
         cd build
         cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
         make
         sudo make install
-        cd ~
         ;;
         libcutefish)
-        sudo apt install qtbase5-dev qtquickcontrols2-5-dev modemmanager-qt-dev libqt5sensors5-dev libkf5networkmanagerqt-dev libkf5screen-dev libkf5bluezqt-dev libkf5kio-dev cmake qtdeclarative5-dev libcanberra-dev libpulse-dev libcanberra-pulse extra-cmake-modules qttools5-dev qttools5-dev-tools
+        cd ~/cutefishos
         git clone git://github.com/cutefishos/libcutefish.git
-        cd libcutefish
+        cd ~/cutefishos/libcutefish
+        sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
+        dpkg-buildpackage -b -uc -us
         mkdir build
         cd build
         cmake ..
         make
         sudo make install
-        cd ~
         ;;
         core)
-        sudo apt install extra-cmake-modules pkg-config xserver-xorg-input-libinput-dev libx11-xcb-dev libxcb1-dev libxcb-randr0-dev\
-        libxcb-keysyms1-dev libxcursor-dev libxcb-xfixes0-dev libxcb-damage0-dev libxcb-composite0-dev libxcb-shm0-dev libxcb-util-dev\
-        libxcb-image0-dev libxcb-dpms0-dev libxcb-dri2-0-dev libxcb-dri3-dev libxcb-ewmh-dev libxcb-glx0-dev libxcb-record0-dev xserver-xorg-dev\
-        xserver-xorg-input-synaptics-dev libxtst-dev libsm-dev libpolkit-qt5-1-dev libpolkit-agent-1-dev libkf5windowsystem-dev libkf5globalaccel-dev\
-        libkf5coreaddons-dev libkf5idletime-dev libqt5x11extras5-dev qtbase5-dev qtdeclarative5-dev qtquickcontrols2-5-dev qttools5-dev qttools5-dev-tools
+        cd ~/cutefishos
         git clone git://github.com/cutefishos/core.git
-        cd core
+        cd ~/cutefishos/core
+        sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
+        dpkg-buildpackage -b -uc -us
         mkdir build
         cd build
         cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
         make
         sudo make install
-        cd ~
         ;;
         updator)
-        sudo apt install cmake libqapt-dev
+        cd ~/cutefishos
         git clone git://github.com/cutefishos/updator.git
-        cd updator
+        cd ~/cutefishos/updator
+        sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
+        dpkg-buildpackage -b -uc -us
         mkdir build
         cd build
         cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
         make
         sudo make install
-        cd ~
         ;;
         screenlocker)
-        sudo apt install libpam0g-dev libx11-dev -y
+        cd ~/cutefishos
         git clone git://github.com/cutefishos/screenlocker.git
-        cd screenlocker
+        cd ~/cutefishos/screenlocker
+        sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
+        dpkg-buildpackage -b -uc -us
         mkdir build
         cd build
         cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
         make
         sudo make install
-        cd ~
         ;;
         texteditor)
-        sudo apt install equivs curl git devscripts lintian build-essential automake autotools-dev --no-install-recommends
+        cd ~/cutefishos
         sudo mk-build-deps -i -t "apt-get --yes" -r
         git clone git://github.com/cutefishos/texteditor.git
-        cd texteditor
+        cd ~/cutefishos/texteditor
+        sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
+        dpkg-buildpackage -b -uc -us
         mkdir build
         cd build
         cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
         make
         sudo make install
-        cd ~
         ;;
         calculator)
-        sudo apt-get install cmake gcc qtbase5-dev qtdeclarative5-dev qml-module-qtquick2 qml-module-qtquick-controls2
+        cd ~/cutefishos
         git clone git://github.com/cutefishos/calculator.git
-        cd calculator
+        cd ~/cutefishos/calculator
+        sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
+        dpkg-buildpackage -b -uc -us
         mkdir build
         cd build
         cmake ..
         make
         sudo make install
-        cd ~
         ;;
         kwin-plugins)
+        cd ~/cutefishos
         git clone git://github.com/cutefishos/kwin-plugins.git
-        cd kwin-plugins
+        cd ~/cutefishos/kwin-plugins
+        sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
+        dpkg-buildpackage -b -uc -us
         mkdir build
         cd build
         cmake ..
         make
         sudo make install
-        cd ~
         ;;
         videoplayer)
+        cd ~/cutefishos
         git clone git://github.com/cutefishos/videoplayer.git
-        cd videoplayer
+        cd ~/cutefishos/videoplayer
+        sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
+        dpkg-buildpackage -b -uc -us
         mkdir build
         cd build
         cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
         make
         sudo make install
-        cd ~
         ;;
         sddm-theme)
+        cd ~/cutefishos
         git clone git://github.com/cutefishos/sddm-theme.git
-        cd sddm-theme
+        cd ~/cutefishos/sddm-theme
+        sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
+        dpkg-buildpackage -b -uc -us
         mkdir build
         cd build
         cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
         make
         sudo make install
-        cd ~
         ;;
         appmotor)
-        sudo apt install cmake qtbase5-dev qtdeclarative5-dev qtquickcontrols2-5-dev libsystemd-dev libcap-dev
+        cd ~/cutefishos
         git clone git://github.com/cutefishos/appmotor.git
-        cd appmotor
+        cd ~/cutefishos/appmotor
+        sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
+        dpkg-buildpackage -b -uc -us
         mkdir build
         cd build
         cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
         make
         sudo make install
-        cd ~
         ;;
         quit)
         exit 1
         ;;
         *)
-        echo "输入错误，请输入项目前序号或者输入25(quit)退出"
+        echo "输入错误, 请输入项目前序号或者输入25(quit)退出"
         ;;
     esac
 }
 
-select i in filemanager dock fishui screenshot qt-plugins terminal launcher settings debinstaller icons gtk-themes daemon statusbar libcutefish core updator screenlocker texteditor calculator kwin-plugins videoplayer sddm-theme appmotor all quit
+select i in fishui libcutefish qt-plugins kwin-plugins core daemon filemanager dock screenshot terminal launcher settings debinstaller icons gtk-themes statusbar updator screenlocker calculator videoplayer sddm-theme appmotor texteditor all quit
 do
    if test $i = all
    then
-       for j in [1:23]
+       for j in fishui libcutefish qt-plugins kwin-plugins core daemon filemanager dock screenshot terminal launcher settings debinstaller icons gtk-themes statusbar updator screenlocker calculator videoplayer sddm-theme appmotor texteditor
        do
           Compile $j
         done
