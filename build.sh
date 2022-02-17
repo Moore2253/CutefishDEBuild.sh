@@ -1,6 +1,6 @@
 #!/bin/bash
 #case select test for
-echo '欢迎使用CutefishDE自动编译脚本, 本脚本适用于大部分Debian/Ubuntu发行版, 旨在让更多Linux使用可爱鱼.'
+echo '欢迎使用CutefishDE自动编译脚本, 本脚本适用于大部分Debian/Ubuntu发行版, 旨在让更多Linux玩家使用可爱鱼.'
 echo '若编译出现错误可根据官方GitHub自行修改脚本内容再次编译, 官方Github: https://github.com/cutefishos/ .'
 echo '原作者Moore本墨, Github: https://github.com/Moore2253/CutefishOSBuild.sh'
 echo '增加了一次编译所有库的功能, 修改者wujunyi'
@@ -13,7 +13,7 @@ if test -e ~/cutefishos
 then
   echo '检测到同名文件夹, 正在删除'
   sudo rm -rf ~/cutefishos
-  echo '删除完毕, 重新创建文件夹, 继续编译'
+  echo '删除完毕, 继续编译'
   mkdir ~/cutefishos
 else
   echo "无同名文件夹, 继续编译"
