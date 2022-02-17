@@ -1,19 +1,19 @@
 #!/bin/bash
 #case select test for
-echo '欢迎使用CutefishDE自动编译脚本, 本脚本适用于大部分Debian/Ubuntu发行版, 旨在让更多Linux玩家使用可爱鱼.'
+echo '欢迎使用CutefishDE自动编译脚本, 本脚本适用于大部分Debian/Ubuntu发行版, 旨在让更多Linux使用可爱鱼.'
 echo '若编译出现错误可根据官方GitHub自行修改脚本内容再次编译, 官方Github: https://github.com/cutefishos/ .'
 echo '原作者Moore本墨, Github: https://github.com/Moore2253/CutefishOSBuild.sh'
 echo '增加了一次编译所有库的功能, 修改者wujunyi'
 echo '提示: 请输入项目前序号并回车以开始编译, 输入25(quit)退出'
 
-PS3='请选择你要编译的项目, 25为退出: '
+PS3='请选择你要编译的项目, 27为退出: '
 echo $PS3
 echo '检测~/目录下是否存在是否已经存在cutefishos文件夹'
 if test -e ~/cutefishos 
 then
   echo '检测到同名文件夹, 正在删除'
   sudo rm -rf ~/cutefishos
-  echo '删除完毕, 继续编译'
+  echo '删除完毕, 重新创建文件夹, 继续编译'
   mkdir ~/cutefishos
 else
   echo "无同名文件夹, 继续编译"
@@ -296,7 +296,7 @@ function Compile(){
         dpkg-buildpackage -b -uc -us
         mkdir build
         cd build
-        cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
+        cmake ..
         make
         sudo make install
         ;;
@@ -312,20 +312,44 @@ function Compile(){
         make
         sudo make install
         ;;
+        wallpapers)
+        cd ~/cutefishos
+        git clone git://github.com/cutefishos/wallpapers.git
+        cd ~/cutefishos/wallpapers
+        sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
+        dpkg-buildpackage -b -uc -us
+        mkdir build
+        cd build
+        cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
+        make
+        sudo make install
+        ;;
+        calamares)
+        cd ~/cutefishos
+        git clone git://github.com/cutefishos/calamares.git
+        cd ~/cutefishos/calamares
+        sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
+        dpkg-buildpackage -b -uc -us
+        mkdir build
+        cd build
+        cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
+        make
+        sudo make install
+        ;;
         quit)
         exit 1
         ;;
         *)
-        echo "输入错误, 请输入项目前序号或者输入25(quit)退出"
+        echo "输入错误, 请输入项目前序号或者输入27(quit)退出"
         ;;
     esac
 }
 
-select i in fishui libcutefish qt-plugins kwin-plugins core daemon filemanager dock screenshot terminal launcher settings debinstaller icons gtk-themes statusbar updator screenlocker calculator videoplayer sddm-theme appmotor texteditor all quit
+select i in fishui libcutefish qt-plugins kwin-plugins core daemon filemanager dock screenshot terminal launcher settings debinstaller icons gtk-themes statusbar updator screenlocker calculator videoplayer sddm-theme appmotor wallpapers calamares texteditor all quit
 do
    if test $i == all
    then
-       for j in fishui libcutefish qt-plugins kwin-plugins core daemon filemanager dock screenshot terminal launcher settings debinstaller icons gtk-themes statusbar updator screenlocker calculator videoplayer sddm-theme appmotor texteditor
+       for j in fishui libcutefish qt-plugins kwin-plugins core daemon filemanager dock screenshot terminal launcher settings debinstaller icons gtk-themes statusbar updator screenlocker calculator videoplayer sddm-theme appmotor wallpapers calamares texteditor
        do
           Compile $j
         done
