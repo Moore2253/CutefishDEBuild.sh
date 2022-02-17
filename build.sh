@@ -323,7 +323,7 @@ function Compile(){
 
 select i in fishui libcutefish qt-plugins kwin-plugins core daemon filemanager dock screenshot terminal launcher settings debinstaller icons gtk-themes statusbar updator screenlocker calculator videoplayer sddm-theme appmotor texteditor all quit
 do
-   if test $i = all
+   if test $i == all
    then
        for j in fishui libcutefish qt-plugins kwin-plugins core daemon filemanager dock screenshot terminal launcher settings debinstaller icons gtk-themes statusbar updator screenlocker calculator videoplayer sddm-theme appmotor texteditor
        do
