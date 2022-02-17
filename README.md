@@ -1,5 +1,5 @@
 # CutefishOSBuild.sh
-* CutefishDE自动编译脚本  
+* CutefishDE自动编译脚本 。
 * 作者: Moore、wujunyi。
 ## 概要
 * 本脚本用于编译cutefish官方DE，基于官方编译方法，使用select和case语句以实现选择，并添加if语句检测文件夹。
