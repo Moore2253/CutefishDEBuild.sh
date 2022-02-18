@@ -1,5 +1,5 @@
-# CutefishOSBuild.sh
-* CutefishDE自动编译脚本 。
+# CutefishDEBuild.sh
+* Cutefish桌面环境自动编译脚本 。
 * 作者: Moore、wujunyi。
 ## 概要
 * 本脚本用于编译cutefish官方DE，基于官方编译方法，使用select和case语句以实现选择，并添加if语句检测文件夹。
@@ -17,14 +17,14 @@
 * 打开终端模拟器并依次输入：
 > GitHub
 ```bash
-git clone https://github.com/Moore2253/CutefishOSBuild.sh.git
+git clone https://github.com/Moore2253/CutefishDEBuild.sh.git
 cd ~/CutefishOSBuild.sh
 chmod +x ./build.sh
 bash ./build.sh
 ```
 > Gitee
 ```bash
-git clone https://gitee.com/moore123/CutefishOSBuild.sh.git
+git clone https://gitee.com/moore123/CutefishDEBuild.sh.git
 cd ~/CutefishOSBuild.sh
 chmod +x ./build.sh
 bash ./build.sh
