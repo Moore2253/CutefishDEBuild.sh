@@ -13,3 +13,8 @@
 ## 提交Bug以及完善
 * 如果你有更好的解决方案或者想出一份力可以提交PR。
 * 如果编译出现问题请提交Issues
+## 使用方法
+> git clone https://github.com/Moore2253/CutefishOSBuild.sh.git
+> cd ~/CutefishOSBuild.sh
+> chmod +x ./build.sh
+> bash ./build.sh
