@@ -15,8 +15,16 @@
 * 如果编译出现问题请提交Issues。
 ## 使用方法
 * 打开终端模拟器并依次输入：
+> GitHub
 ```bash
 git clone https://github.com/Moore2253/CutefishOSBuild.sh.git
+cd ~/CutefishOSBuild.sh
+chmod +x ./build.sh
+bash ./build.sh
+```
+> Gitee
+```bash
+git clone https://gitee.com/moore123/CutefishOSBuild.sh.git
 cd ~/CutefishOSBuild.sh
 chmod +x ./build.sh
 bash ./build.sh
