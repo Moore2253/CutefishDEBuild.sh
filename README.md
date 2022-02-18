@@ -12,9 +12,13 @@
 * 4.0 2022年2月17日 修复一个小bug，新增两个编译项目。
 ## 提交Bug以及完善
 * 如果你有更好的解决方案或者想出一份力可以提交PR。
-* 如果编译出现问题请提交Issues
+* 如果编译出现问题请提交Issues。
 ## 使用方法
-> * git clone https://github.com/Moore2253/CutefishOSBuild.sh.git
-> * cd ~/CutefishOSBuild.sh
-> * chmod +x ./build.sh
-> * bash ./build.sh
+* 打开终端模拟器并依次输入：
+```bash
+git clone https://github.com/Moore2253/CutefishOSBuild.sh.git
+cd ~/CutefishOSBuild.sh
+chmod +x ./build.sh
+bash ./build.sh
+```
+* 输入项目前序号1-25即可单独编译，输入26将一键按顺序编译全部，输入27退出脚本运行。
