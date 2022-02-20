@@ -18,14 +18,14 @@
 > GitHub
 ```bash
 git clone https://github.com/Moore2253/CutefishDEBuild.sh.git
-cd ~/CutefishOSBuild.sh
+cd ~/CutefishDEBuild.sh
 chmod +x ./build.sh
 bash ./build.sh
 ```
 > Gitee
 ```bash
 git clone https://gitee.com/moore123/CutefishDEBuild.sh.git
-cd ~/CutefishOSBuild.sh
+cd ~/CutefishDEBuild.sh
 chmod +x ./build.sh
 bash ./build.sh
 ```
