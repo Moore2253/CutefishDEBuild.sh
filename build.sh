@@ -29,7 +29,7 @@ function Compile(){
         echo '开始编译filemanager'
         cd ~/cutefishos
         echo '正在克隆项目'
-        git clone git://github.com/cutefishos/filemanager.git
+        git clone https://github.com/cutefishos/filemanager.git
         echo '正在编译'
         cd ~/cutefishos/filemanager
         sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
@@ -46,7 +46,7 @@ function Compile(){
         echo '开始编译dock'
         cd ~/cutefishos
         echo '正在克隆项目'
-        git clone git://github.com/cutefishos/dock.git
+        git clone https://github.com/cutefishos/dock.git
         echo '正在编译'
         cd ~/cutefishos/dock
         sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
@@ -61,7 +61,7 @@ function Compile(){
         ;;
         fishui)
         cd ~/cutefishos
-        git clone git://github.com/cutefishos/fishui.git
+        git clone https://github.com/cutefishos/fishui.git
         cd ~/cutefishos/fishui
         sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
         dpkg-buildpackage -b -uc -us
@@ -73,7 +73,7 @@ function Compile(){
         ;;
         screenshot)
         cd ~/cutefishos
-        git clone git://github.com/cutefishos/screenshot.git
+        git clone https://github.com/cutefishos/screenshot.git
         cd ~/cutefishos/screenshot
         sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
         dpkg-buildpackage -b -uc -us
@@ -85,7 +85,7 @@ function Compile(){
         ;;
         qt-plugins)
         cd ~/cutefishos
-        git clone git://github.com/cutefishos/qt-plugins.git
+        git clone https://github.com/cutefishos/qt-plugins.git
         cd ~/cutefishos/qt-plugins
         sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
         dpkg-buildpackage -b -uc -us
@@ -97,7 +97,7 @@ function Compile(){
         ;;
         terminal)
         cd ~/cutefishos
-        git clone git://github.com/cutefishos/terminal.git
+        git clone https://github.com/cutefishos/terminal.git
         cd ~/cutefishos/terminal
         sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
         dpkg-buildpackage -b -uc -us
@@ -109,7 +109,7 @@ function Compile(){
         ;;
         launcher)
         cd ~/cutefishos
-        git clone git://github.com/cutefishos/launcher.git
+        git clone https://github.com/cutefishos/launcher.git
         cd ~/cutefishos/launcher
         sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
         dpkg-buildpackage -b -uc -us
@@ -121,7 +121,7 @@ function Compile(){
         ;;
         settings)
         cd ~/cutefishos
-        git clone git://github.com/cutefishos/settings.git
+        git clone https://github.com/cutefishos/settings.git
         cd ~/cutefishos/settings
         sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
         dpkg-buildpackage -b -uc -us
@@ -133,7 +133,7 @@ function Compile(){
         ;;
         debinstaller)
         cd ~/cutefishos
-        git clone git://github.com/cutefishos/debinstaller.git
+        git clone https://github.com/cutefishos/debinstaller.git
         cd ~/cutefishos/debinstaller
         sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
         dpkg-buildpackage -b -uc -us
@@ -145,7 +145,7 @@ function Compile(){
         ;;
         icons)
         cd ~/cutefishos
-        git clone git://github.com/cutefishos/icons.git
+        git clone https://github.com/cutefishos/icons.git
         cd ~/cutefishos/icons
         sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
         dpkg-buildpackage -b -uc -us
@@ -157,7 +157,7 @@ function Compile(){
         ;;
         gtk-themes)
         cd ~/cutefishos
-        git clone git://github.com/cutefishos/gtk-themes.git
+        git clone https://github.com/cutefishos/gtk-themes.git
         cd ~/cutefishos/gtk-themes
         sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
         dpkg-buildpackage -b -uc -us
@@ -169,7 +169,7 @@ function Compile(){
         ;;
         daemon)
         cd ~/cutefishos
-        git clone git://github.com/cutefishos/daemon.git
+        git clone https://github.com/cutefishos/daemon.git
         cd ~/cutefishos/daemon
         sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
         dpkg-buildpackage -b -uc -us
@@ -181,7 +181,7 @@ function Compile(){
         ;;
         statusbar)
         cd ~/cutefishos
-        git clone git://github.com/cutefishos/statusbar.git
+        git clone https://github.com/cutefishos/statusbar.git
         cd ~/cutefishos/statusbar
         sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
         dpkg-buildpackage -b -uc -us
@@ -193,7 +193,7 @@ function Compile(){
         ;;
         libcutefish)
         cd ~/cutefishos
-        git clone git://github.com/cutefishos/libcutefish.git
+        git clone https://github.com/cutefishos/libcutefish.git
         cd ~/cutefishos/libcutefish
         sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
         dpkg-buildpackage -b -uc -us
@@ -205,7 +205,7 @@ function Compile(){
         ;;
         core)
         cd ~/cutefishos
-        git clone git://github.com/cutefishos/core.git
+        git clone https://github.com/cutefishos/core.git
         cd ~/cutefishos/core
         sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
         dpkg-buildpackage -b -uc -us
@@ -217,7 +217,7 @@ function Compile(){
         ;;
         updator)
         cd ~/cutefishos
-        git clone git://github.com/cutefishos/updator.git
+        git clone https://github.com/cutefishos/updator.git
         cd ~/cutefishos/updator
         sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
         dpkg-buildpackage -b -uc -us
@@ -229,7 +229,7 @@ function Compile(){
         ;;
         screenlocker)
         cd ~/cutefishos
-        git clone git://github.com/cutefishos/screenlocker.git
+        git clone https://github.com/cutefishos/screenlocker.git
         cd ~/cutefishos/screenlocker
         sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
         dpkg-buildpackage -b -uc -us
@@ -242,7 +242,7 @@ function Compile(){
         texteditor)
         cd ~/cutefishos
         sudo mk-build-deps -i -t "apt-get --yes" -r
-        git clone git://github.com/cutefishos/texteditor.git
+        git clone https://github.com/cutefishos/texteditor.git
         cd ~/cutefishos/texteditor
         sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
         dpkg-buildpackage -b -uc -us
@@ -254,7 +254,7 @@ function Compile(){
         ;;
         calculator)
         cd ~/cutefishos
-        git clone git://github.com/cutefishos/calculator.git
+        git clone https://github.com/cutefishos/calculator.git
         cd ~/cutefishos/calculator
         sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
         dpkg-buildpackage -b -uc -us
@@ -266,7 +266,7 @@ function Compile(){
         ;;
         kwin-plugins)
         cd ~/cutefishos
-        git clone git://github.com/cutefishos/kwin-plugins.git
+        git clone https://github.com/cutefishos/kwin-plugins.git
         cd ~/cutefishos/kwin-plugins
         sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
         dpkg-buildpackage -b -uc -us
@@ -278,7 +278,7 @@ function Compile(){
         ;;
         videoplayer)
         cd ~/cutefishos
-        git clone git://github.com/cutefishos/videoplayer.git
+        git clone https://github.com/cutefishos/videoplayer.git
         cd ~/cutefishos/videoplayer
         sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
         dpkg-buildpackage -b -uc -us
@@ -290,7 +290,7 @@ function Compile(){
         ;;
         sddm-theme)
         cd ~/cutefishos
-        git clone git://github.com/cutefishos/sddm-theme.git
+        git clone https://github.com/cutefishos/sddm-theme.git
         cd ~/cutefishos/sddm-theme
         sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
         dpkg-buildpackage -b -uc -us
@@ -302,7 +302,7 @@ function Compile(){
         ;;
         appmotor)
         cd ~/cutefishos
-        git clone git://github.com/cutefishos/appmotor.git
+        git clone https://github.com/cutefishos/appmotor.git
         cd ~/cutefishos/appmotor
         sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
         dpkg-buildpackage -b -uc -us
@@ -314,7 +314,7 @@ function Compile(){
         ;;
         wallpapers)
         cd ~/cutefishos
-        git clone git://github.com/cutefishos/wallpapers.git
+        git clone https://github.com/cutefishos/wallpapers.git
         cd ~/cutefishos/wallpapers
         sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
         dpkg-buildpackage -b -uc -us
@@ -326,7 +326,7 @@ function Compile(){
         ;;
         calamares)
         cd ~/cutefishos
-        git clone git://github.com/cutefishos/calamares.git
+        git clone https://github.com/cutefishos/calamares.git
         cd ~/cutefishos/calamares
         sudo mk-build-deps ./debian/control -i -t "apt-get --yes" -r
         dpkg-buildpackage -b -uc -us
