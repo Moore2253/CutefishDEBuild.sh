@@ -10,7 +10,9 @@
 * 2.0 2022年1月2日 增加了一次编译所有项目的功能，并将克隆网址由https改为git，一些小修小改。
 * 3.0 2022年2月16日 根据网传编译顺序进行排序，完善一键编译，实测已无明显bug。
 * 4.0 2022年2月17日 修复一个小bug，新增两个编译项目。
-* 5.0 2022年3月21日 由于GitHub身份验证更新 “git clone git:/” 不再可用将其替换为https。
+* 5.0 2022年3月21日 由于GitHub身份验证更新 “git clone git://” 不再可用将其替换为https。
+* 6.0 2022年4月3日 为了国内更好的编译，脚本将更新为‘build-gitee.sh’（通过Gitee克隆）和‘build-github.sh’（通过GitHub克隆），可根据自身情况选择。
+*     *Gitee仓库并非官方维护，更新可能不及时*
 ## 提交Bug以及完善
 * 如果你有更好的解决方案或者想出一份力可以提交PR。
 * 如果编译出现问题请提交Issues。
@@ -20,14 +22,14 @@
 ```bash
 git clone https://github.com/Moore2253/CutefishDEBuild.sh.git
 cd ~/CutefishDEBuild.sh
-chmod +x ./build.sh
+chmod +x ./build-github.sh
 bash ./build.sh
 ```
 > Gitee
 ```bash
 git clone https://gitee.com/moore123/CutefishDEBuild.sh.git
 cd ~/CutefishDEBuild.sh
-chmod +x ./build.sh
+chmod +x ./build-gitee.sh
 bash ./build.sh
 ```
 * 输入项目前序号1-25即可单独编译，输入26将一键按顺序编译全部，输入27退出脚本运行。
