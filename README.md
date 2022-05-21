@@ -25,10 +25,11 @@ chmod +x ./build-github.sh
 bash ./build.sh
 ```
 > Gitee
+> 由于Gitee在5月19日以建造”绿色健康的开源社区“为由不允许未登录用户访问，目前暂且不知道能否正常git，Gitee仓库作废。
 ```bash
-git clone https://gitee.com/moore123/CutefishDEBuild.sh.git
-cd ~/CutefishDEBuild.sh
-chmod +x ./build-gitee.sh
-bash ./build.sh
+# git clone https://gitee.com/moore123/CutefishDEBuild.sh.git
+# cd ~/CutefishDEBuild.sh
+# chmod +x ./build-gitee.sh
+# bash ./build.sh
 ```
 * 输入项目前序号1-25即可单独编译，输入26将一键按顺序编译全部，输入27退出脚本运行。
